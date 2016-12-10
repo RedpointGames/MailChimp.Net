@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>MailChimp.Net.V3.Core</id>
     <version>$version$</version>
-    <title>$title$</title>
+    <title>MailChimp.Net.V3.Core</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://github.com/brandonseydel/MailChimp.Net</projectUrl>
@@ -15,6 +15,9 @@
     <tags>MailChimp Mail Chimp 3.0 MailChimp v3.0 MailChimp.Net.V3 MailChimpv3.0 MailChimpv3 MailChimp3</tags>
     <summary>
       A  very fast, thin, and intuitive .NET Wrapper for the Mail Chimp v3.0 API.
+
+      This is an alternate package with .NET Core support, intended only for use while .NET Core is not
+      available in the main package.
     </summary>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="9.0.1" />
