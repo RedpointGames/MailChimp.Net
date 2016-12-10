@@ -14,6 +14,8 @@ using MailChimp.Net.Interfaces;
 using MailChimp.Net.Models;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
+
 #pragma warning disable 1584, 1711, 1572, 1581, 1580
 
 namespace MailChimp.Net.Logic
@@ -371,7 +373,7 @@ namespace MailChimp.Net.Logic
 		public async Task ExecuteCampaignActionAsync(string campaignId, CampaignAction campaignAction)
 		{
 
-			var member = typeof(CampaignAction).GetMember(campaignAction.ToString());
+			var member = typeof(CampaignAction).GetTypeInfo().DeclaredMembers.Where(x => x.Name == campaignAction.ToString());
 			var action =
 				member.FirstOrDefault()?
 					  .GetCustomAttributes(typeof(DescriptionAttribute), false)

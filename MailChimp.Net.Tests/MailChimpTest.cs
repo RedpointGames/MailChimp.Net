@@ -7,6 +7,7 @@
 using System;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using MailChimp.Net.Core;
 using MailChimp.Net.Interfaces;
@@ -75,7 +76,12 @@ namespace MailChimp.Net.Tests
         [TestInitialize]
         public void Initialize()
         {
+            var configuration = new MailChimpConfiguration();
+            configuration.ApiKey = "599629998b18960fa6e8a283d280ac28-us13";
+
             this._mailChimpManager = new MailChimpManager();
+            this._mailChimpManager.Configure(configuration);
+
             RunBeforeTestFixture().Wait();
         }
 
@@ -94,7 +100,18 @@ namespace MailChimp.Net.Tests
         /// </returns>
         internal string Hash(string emailAddress)
         {
-            using (var md5 = MD5.Create()) return md5.GetHash(emailAddress);
+            using (var md5 = MD5.Create())
+            {
+                // Convert the input string to a byte array and compute the hash.
+                var data = md5.ComputeHash(Encoding.UTF8.GetBytes(emailAddress));
+                var builder = new StringBuilder();
+                foreach (var t in data)
+                {
+                    builder.Append(t.ToString("x2"));
+                }
+
+                return builder.ToString();
+            }
         }
     }
 }

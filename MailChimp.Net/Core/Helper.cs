@@ -8,7 +8,6 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -79,7 +78,7 @@ namespace MailChimp.Net.Core
         ///     </paramref>
         /// includes an unsupported specifier. Supported format specifiers are listed in the Remarks section.
         /// </exception>
-        public static string GetHash(this HashAlgorithm md5Hash, string input)
+        public static string GetHash(this MD5Managed md5Hash, string input)
         {
             // Convert the input string to a byte array and compute the hash.
             var data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));

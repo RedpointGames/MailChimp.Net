@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using MailChimp.Net.Interfaces;
 
 namespace MailChimp.Net
@@ -11,7 +10,15 @@ namespace MailChimp.Net
         private string _apiKey;
         public string ApiKey
         {
-            get { return _apiKey ?? (_apiKey = ConfigurationManager.AppSettings["MailChimpApiKey"]); }
+            get
+            {
+                if (_apiKey == null)
+                {
+                    throw new InvalidOperationException("MailChimp API key is not set.  MailChimpApiKey in the configuration file is no longer supported - you must set it at runtime.");
+                }
+
+                return _apiKey;
+            }
             set { _apiKey = value; }
         }
 

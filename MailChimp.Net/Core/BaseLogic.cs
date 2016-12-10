@@ -7,11 +7,10 @@
 using System;
 using System.Net.Http;
 using System.Reflection;
-using System.Security.Cryptography;
 using System.Text;
 using MailChimp.Net.Interfaces;
 
-#pragma warning disable 1584,1711,1572,1581,1580
+#pragma warning disable 1584, 1711, 1572, 1581, 1580
 
 namespace MailChimp.Net.Core
 {
@@ -96,7 +95,8 @@ namespace MailChimp.Net.Core
         /// </exception>
         public string Hash(string emailAddress)
         {
-            using (var md5 = MD5.Create()) return md5.GetHash(emailAddress.ToLower());
+            var md5 = new MD5Managed();
+            return md5.GetHash(emailAddress.ToLower());
         }
     }
 }
